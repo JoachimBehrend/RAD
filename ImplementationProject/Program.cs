@@ -34,18 +34,23 @@ namespace ImplementationProject
             int l2 = 63;
             MultiplyModPrime mmp = new MultiplyModPrime(a2, b2, l2);
             
-            Console.WriteLine("The value of a2 is {0} (or 0x{0:x}).", a2);
-            Console.WriteLine("The value of a2 is {0} (or 0x{0:x}).", b2);
-
+            // Console.WriteLine("The value of a2 is {0} (or 0x{0:x}).", a2);
+            // Console.WriteLine("The value of b2 is {0} (or 0x{0:x}).", b2);
             // Console.Write("h(7): ");
             // ulong x2 = 9;
             // Console.WriteLine(mmp.hash(x2));
 
-            // // Opgave 1.c
-            // // Problemer med at itererer igennem stream
-            // Console.WriteLine("\nOpgave 1.c");
+            // Opgave 1.c
+            // Problemer med at itererer igennem stream
+            Console.WriteLine("\nOpgave 1.c");
             // Console.WriteLine("Creating Stream");
-
+            // var s = Stream.CreateStream(8,4).GetEnumerator();
+            
+            ulong msSum = 0;
+            foreach (var (key,value) in Stream.CreateStream(20,9)){
+                msSum += ms.hash(key);
+            }
+            Console.WriteLine("Sum using Multiply-shift: {0}", msSum);
         }
     }
 }
