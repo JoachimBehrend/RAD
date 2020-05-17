@@ -2,11 +2,11 @@ namespace ImplementationProject
 {
     public class LinkedHashEntry
     {
-        protected int key;
+        protected ulong key;
         protected int value;
         protected LinkedHashEntry next;
 
-        public LinkedHashEntry(int key, int value) {
+        public LinkedHashEntry(ulong key, int value) {
             this.key = key;
             this.value = value;
             this.next = null;
@@ -20,7 +20,7 @@ namespace ImplementationProject
             this.value = newValue;
         }
 
-        public int getKey() {
+        public ulong getKey() {
             return this.key;
         }
 
