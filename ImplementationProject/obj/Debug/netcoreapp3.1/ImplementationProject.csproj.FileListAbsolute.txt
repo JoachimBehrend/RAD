@@ -1,0 +1,13 @@
+/home/maria/Dropbox/Uni/RAD/RAD/ImplementationProject/bin/Debug/netcoreapp3.1/ImplementationProject
+/home/maria/Dropbox/Uni/RAD/RAD/ImplementationProject/bin/Debug/netcoreapp3.1/ImplementationProject.deps.json
+/home/maria/Dropbox/Uni/RAD/RAD/ImplementationProject/bin/Debug/netcoreapp3.1/ImplementationProject.runtimeconfig.json
+/home/maria/Dropbox/Uni/RAD/RAD/ImplementationProject/bin/Debug/netcoreapp3.1/ImplementationProject.runtimeconfig.dev.json
+/home/maria/Dropbox/Uni/RAD/RAD/ImplementationProject/bin/Debug/netcoreapp3.1/ImplementationProject.dll
+/home/maria/Dropbox/Uni/RAD/RAD/ImplementationProject/bin/Debug/netcoreapp3.1/ImplementationProject.pdb
+/home/maria/Dropbox/Uni/RAD/RAD/ImplementationProject/obj/Debug/netcoreapp3.1/ImplementationProject.csprojAssemblyReference.cache
+/home/maria/Dropbox/Uni/RAD/RAD/ImplementationProject/obj/Debug/netcoreapp3.1/ImplementationProject.csproj.CoreCompileInputs.cache
+/home/maria/Dropbox/Uni/RAD/RAD/ImplementationProject/obj/Debug/netcoreapp3.1/ImplementationProject.AssemblyInfoInputs.cache
+/home/maria/Dropbox/Uni/RAD/RAD/ImplementationProject/obj/Debug/netcoreapp3.1/ImplementationProject.AssemblyInfo.cs
+/home/maria/Dropbox/Uni/RAD/RAD/ImplementationProject/obj/Debug/netcoreapp3.1/ImplementationProject.dll
+/home/maria/Dropbox/Uni/RAD/RAD/ImplementationProject/obj/Debug/netcoreapp3.1/ImplementationProject.pdb
+/home/maria/Dropbox/Uni/RAD/RAD/ImplementationProject/obj/Debug/netcoreapp3.1/ImplementationProject.genruntimeconfig.cache
