@@ -71,27 +71,40 @@ namespace ImplementationProject
             //********************
             Console.WriteLine("\nOpgave 2");
             // Test af opgave 2
-            int l3 = 29;
+            int l3 = 2;
             MultiplyModPrime mmp2 = new MultiplyModPrime(a2, b2, l3);
             HashTable mmpHashTable = new HashTable(mmp2, l3);
 
             ulong x1 = 123456;
-            ulong x2 = 2;
-            Console.WriteLine(mmpHashTable.get(x1));
-            mmpHashTable.set(x1, 20);
+            ulong x2 = 4;
+            int v1 = 20;
+            int v2 = -1;
+
+            Console.WriteLine("Checking if key {0} is in hash table", x1);
             Console.WriteLine(mmpHashTable.get(x1));
 
+            Console.WriteLine("\nInserting key {0} with value {1} in table, and checking if it's there", x1, v1);
+            mmpHashTable.set(x1, v1);
+            Console.WriteLine("Placement of {0}: {1}", x1, mmpHashTable.get(x1));
+
+            Console.WriteLine("\nChecking the value of key {0}", x1);
             LinkedHashEntry[] arr1 = mmpHashTable.getTable();
             int x1Value = arr1[mmpHashTable.get(x1)].getValue();
-            Console.WriteLine(x1Value);
+            Console.WriteLine("Value of {0}: {1}", x1, x1Value);
 
-            mmpHashTable.increment(x1, -1);
-            mmpHashTable.increment(x2, -1);
+            Console.WriteLine("\nIncrementing {0} with {1}, and checking its value", x1, v2);
+            mmpHashTable.increment(x1, v2);
+            x1Value = arr1[mmpHashTable.get(x1)].getValue();    
+            Console.WriteLine("Value of {0} = {1}", x1, x1Value);
 
-            x1Value = arr1[mmpHashTable.get(x1)].getValue();
-            int x2Value = arr1[mmpHashTable.get(x2)].getValue();
-            Console.WriteLine("x1 value = {0}", x1Value);
-            Console.WriteLine("x2 value = {0}", x2Value);
+            Console.WriteLine("\nInserting key {0} using increment where d={1}", x2, v2);
+            mmpHashTable.increment(x2, v2);
+ 
+            Console.WriteLine("\nChecking if x2 is in table");
+            Console.WriteLine("Placement of key {0}: {1}", x2, mmpHashTable.get(x2));
+
+            Console.WriteLine("\nChecking number of elements in {0}", mmpHashTable.get(x2));
+            Console.WriteLine("Elements in hashtable[{0}]: {1}", mmpHashTable.get(x2),  mmpHashTable.getCounterArray()[mmpHashTable.get(x2)]);
         }
     }
 }

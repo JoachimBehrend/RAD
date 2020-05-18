@@ -6,24 +6,31 @@ namespace ImplementationProject
     {   
         protected IHashFunction h;
         protected double arrayLength; 
-        protected LinkedHashEntry[] array;
+        protected LinkedHashEntry[] hashArr;
+        // Used for checking correctness
+        protected int[] counterArr;
         public HashTable(IHashFunction hashFunction, double l){
             // Initializes hashfunction and creates array
             this.h = hashFunction;
             this.arrayLength = Math.Pow(2.0, l);
-            this.array = new LinkedHashEntry[(int)arrayLength];
+            this.hashArr = new LinkedHashEntry[(int)arrayLength];
+            this.counterArr = new int[(int)arrayLength];
         }
 
         // Used for checking correctness of methods
         public LinkedHashEntry[] getTable(){
-            return this.array;
+            return this.hashArr;
+        }
+
+        public int[] getCounterArray(){
+            return this.counterArr;
         }
 
         // Returns the value x has hashed to if it is in table
         // If x is not in table, 0 is returned
         public ulong get(ulong x){
             ulong hx = this.h.hash(x);
-            LinkedHashEntry currentEntry = this.array[hx];
+            LinkedHashEntry currentEntry = this.hashArr[hx];
 
             // Goes through all elements that hashed to x
             while(currentEntry != null){
@@ -41,7 +48,7 @@ namespace ImplementationProject
         public void set(ulong x, int v){
             ulong hx = this.h.hash(x);
             LinkedHashEntry previousEntry = null;
-            LinkedHashEntry currentEntry = this.array[hx];
+            LinkedHashEntry currentEntry = this.hashArr[hx];
 
             int xFound = 0;
 
@@ -60,9 +67,9 @@ namespace ImplementationProject
             // If there are no other elements that hash to x, then x is inserted as first element
             if (xFound == 0){
                 LinkedHashEntry newEntry = new LinkedHashEntry(x, v);
-                
+                counterArr[hx] += 1;
                 if (previousEntry == null){
-                    this.array[hx] = newEntry;
+                    this.hashArr[hx] = newEntry;
                 } else {
                      previousEntry.setNext(newEntry);
                 }
@@ -74,7 +81,7 @@ namespace ImplementationProject
         public void increment(ulong x, int d){
             ulong hx = this.h.hash(x);
             LinkedHashEntry previousEntry = null;
-            LinkedHashEntry currentEntry = this.array[hx];
+            LinkedHashEntry currentEntry = this.hashArr[hx];
 
             int xFound = 0;
 
@@ -92,9 +99,10 @@ namespace ImplementationProject
             // If there are no other elements that hash to x, then x is inserted as first element
             if (xFound == 0){
                 LinkedHashEntry newEntry = new LinkedHashEntry(x, d);
+                counterArr[hx] += 1;
                 
                 if (previousEntry == null){
-                    this.array[hx] = newEntry;
+                    this.hashArr[hx] = newEntry;
                 } else {
                      previousEntry.setNext(newEntry);
                 }
