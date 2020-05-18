@@ -64,6 +64,11 @@ namespace ImplementationProject
             }
             Console.WriteLine("Sum using multiply-mod-prime: {0}", mmpSum);
 
+
+            
+            //********************
+            //     Opgave 2
+            //********************
             // Console.WriteLine("\nOpgave 2");
             // // Test af opgave 2
             // ulong a1 = 0b01011101_00010011_00100101_11111001_00111001_11111101_11000100_11101111;;
