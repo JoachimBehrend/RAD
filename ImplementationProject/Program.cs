@@ -7,49 +7,62 @@ namespace ImplementationProject
     {
         static void Main(string[] args)
         {
-            // Console.WriteLine("Opgave 1\n");
+            Console.WriteLine("Opgave 1");
+            //********************
+            //     Opgave 1.a
+            //********************
+            Console.WriteLine("Opgave 1.a: Generering af multiply-shift hashing");
+            // Defining a and l parameters
+            // Creating the uneven random 64 bit number a via random.org by creating a 8 byte number and changing the last bit to 1
+            ulong a1 = 0b01011101_00010011_00100101_11111001_00111001_11111101_11000100_11101111;
+            int l1 = 62;
 
-            // Opgave 1.a
-            // Console.WriteLine("Opgave 1.a: Generering af multiply-shift hashing");
-            // // Creating the uneven random 64 bit number a via random.org by creating a 8 byte number and changing the last bit to 1
-            // ulong a1 = 0b01011101_00010011_00100101_11111001_00111001_11111101_11000100_11101111;;
+            // Setting up hash function
+            MultiplyShift ms = new MultiplyShift(a1,l1);
 
-            // int l1 = 62;
-            // MultiplyShift ms = new MultiplyShift(a1,l1);
+            // Test
+            // ulong x1 = 9;
+            // Console.WriteLine("h({0}): {1}", x1, ms.hash(x1));
 
-            // Console.Write("h(7): ");
-            // ulong x1 = 7;
-            // Console.WriteLine(ms.hash(x1));
 
-            // Opgave 1.b
-            Console.WriteLine("\nOpgave 1.b");
-            //Creating the random 89 bit numbers a and b via random.ord by creating a 12 byte number, and throwing away the first 7 bits
 
-            //Fejl da det er et byte array
-            byte[] bytes_a = {0b0, 0b10101001, 0b00101111, 0b01110101, 0b11011101, 0b00011010, 0b00110010, 0b10111001, 0b11111100, 0b01101101, 0b00100001, 0b00001000};
+            //********************
+            //     Opgave 1.b 
+            //********************
+            Console.WriteLine("\nOpgave 1.b; Generering af multiply-mod-prime hashing");
+            // Setting up parameters a, b and l
+            // Creating the random 89 bit numbers a and b via random.ord by creating a 12 byte number, and throwing away the first 7 bits
+            // Fejl da det er et byte array?
+            byte[] bytes_a = {0b1, 0b10101001, 0b00101111, 0b01110101, 0b11011101, 0b00011010, 0b00110010, 0b10111001, 0b11111100, 0b01101101, 0b00100001, 0b00001000};
             byte[] bytes_b = {0b1, 0b01011101, 0b00110111, 0b00101011, 0b00111100, 0b00100010, 0b01110101, 0b01100010, 0b11100110, 0b01100011, 0b11100011, 0b00010110};
             BigInteger a2 = new BigInteger(bytes_a);
             BigInteger b2 = new BigInteger(bytes_b);
+            int l2 = 63;
 
-            int l2 = 8;
+            // Setting up hash function
             MultiplyModPrime mmp = new MultiplyModPrime(a2, b2, l2);
             
+            // Test
+            // ulong x2 = 90;
+            // Console.WriteLine("h({0}): {1}", x2, mmp.hash(x2));
 
-            // byte[] bytes_test = {0b00, 0b11111100, 0b01101101, 0b00100001, 0b00001000};
-            // BigInteger test = new BigInteger(bytes_test);
-            // Console.WriteLine(a2.GetByteCount());
-            // Console.WriteLine("The value of test is {0} (or 0x{0:x}).", test);
-            // Console.WriteLine("The value of a2 is {0} (or 0x{0:x}).", a2);
-            // Console.WriteLine("The value of b2 is {0} (or 0x{0:x}).", b2);
-            Console.WriteLine("h(7): {0}", mmp.hash(9));
 
-            // Opgave 1.c
-            // Console.WriteLine("\nOpgave 1.c");
-            // ulong msSum = 0;
-            // foreach (var (key,value) in Stream.CreateStream(20,9)){
-            //     msSum += ms.hash(key);
-            // }
-            // Console.WriteLine("Sum using Multiply-shift: {0}", msSum);
+
+            //********************
+            //     Opgave 1.c 
+            //********************
+            Console.WriteLine("\nOpgave 1.c");
+            ulong msSum = 0;
+            foreach (var (key,value) in Stream.CreateStream(20,9)){
+                msSum += ms.hash(key);
+            }
+            Console.WriteLine("Sum using multiply-shift: {0}", msSum);
+
+            ulong mmpSum = 0;
+            foreach (var (key,value) in Stream.CreateStream(20,9)){
+                mmpSum += mmp.hash(key);
+            }
+            Console.WriteLine("Sum using multiply-mod-prime: {0}", mmpSum);
 
             // Console.WriteLine("\nOpgave 2");
             // // Test af opgave 2

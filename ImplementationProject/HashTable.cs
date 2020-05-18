@@ -1,12 +1,13 @@
 using System;
+using System.Numerics;
 namespace ImplementationProject
 {
     public class HashTable
     {   
-        protected IHastFunction h;
+        protected IHashFunction h;
         protected double arrayLength; 
         protected LinkedHashEntry[] array;
-        public HashTable(IHastFunction hashFunction, double l){
+        public HashTable(IHashFunction hashFunction, double l){
             this.h = hashFunction;
             this.arrayLength = Math.Pow(2.0, l);
             this.array = new LinkedHashEntry[(int)arrayLength];
