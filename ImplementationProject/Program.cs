@@ -69,30 +69,29 @@ namespace ImplementationProject
             //********************
             //     Opgave 2
             //********************
-            // Console.WriteLine("\nOpgave 2");
-            // // Test af opgave 2
-            // ulong a1 = 0b01011101_00010011_00100101_11111001_00111001_11111101_11000100_11101111;;
-            // int l1 = 3;
-            // MultiplyShift ms = new MultiplyShift(a1,l1);
+            Console.WriteLine("\nOpgave 2");
+            // Test af opgave 2
+            int l3 = 29;
+            MultiplyModPrime mmp2 = new MultiplyModPrime(a2, b2, l3);
+            HashTable mmpHashTable = new HashTable(mmp2, l3);
 
-            // HashTable msHashTable = new HashTable(ms, l1);
-            // ulong x1 = 123456;
-            // ulong x2 = 2;
-            // Console.WriteLine(msHashTable.get(x1));
-            // msHashTable.set(x1, 20);
-            // Console.WriteLine(msHashTable.get(x1));
+            ulong x1 = 123456;
+            ulong x2 = 2;
+            Console.WriteLine(mmpHashTable.get(x1));
+            mmpHashTable.set(x1, 20);
+            Console.WriteLine(mmpHashTable.get(x1));
 
-            // LinkedHashEntry[] arr1 = msHashTable.getTable();
-            // int x1Value = arr1[msHashTable.get(x1)].getValue();
-            // Console.WriteLine(x1Value);
+            LinkedHashEntry[] arr1 = mmpHashTable.getTable();
+            int x1Value = arr1[mmpHashTable.get(x1)].getValue();
+            Console.WriteLine(x1Value);
 
-            // msHashTable.increment(x1, -1);
-            // msHashTable.increment(x2, -1);
+            mmpHashTable.increment(x1, -1);
+            mmpHashTable.increment(x2, -1);
 
-            // x1Value = arr1[msHashTable.get(x1)].getValue();
-            // int x2Value = arr1[msHashTable.get(x2)].getValue();
-            // Console.WriteLine("x1 value = {0}", x1Value);
-            // Console.WriteLine("x2 value = {0}", x2Value);
+            x1Value = arr1[mmpHashTable.get(x1)].getValue();
+            int x2Value = arr1[mmpHashTable.get(x2)].getValue();
+            Console.WriteLine("x1 value = {0}", x1Value);
+            Console.WriteLine("x2 value = {0}", x2Value);
         }
     }
 }
