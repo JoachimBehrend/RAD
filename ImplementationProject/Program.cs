@@ -111,6 +111,7 @@ namespace ImplementationProject
             //********************
             //     Opgave 3
             //********************
+            Console.WriteLine("\nOpgave 3");
             // Creating the stream
             int stream_l = 3;
             int stream_n = 10;
@@ -118,7 +119,7 @@ namespace ImplementationProject
 
             // Creating ms hashtable
             ulong ms_a = 0b10100010_10110001_10000101_11011000_01100111_00110101_01111000_01111011;
-            int ms_l = 62;
+            int ms_l = 29;
             MultiplyShift msHashFunc = new MultiplyShift(ms_a, ms_l);
             HashTable multiplyShiftTable = new HashTable(msHashFunc, ms_l);
 
@@ -127,13 +128,13 @@ namespace ImplementationProject
             byte[] mmp_bytes_b = {0b1, 0b00011011, 0b11111000, 0b10111011, 0b11111001, 0b00111111, 0b11011101, 0b11100011, 0b01111100, 0b01100111, 0b11011011, 0b10110011};
             BigInteger mmp_a = new BigInteger(mmp_bytes_a);
             BigInteger mmp_b= new BigInteger(mmp_bytes_b);
-            int mmp_l = 62;
+            int mmp_l = 20;
             MultiplyModPrime mmpHashFunc = new MultiplyModPrime(mmp_a, mmp_b, mmp_l);
             HashTable multiplyModPrimeTable = new HashTable(mmpHashFunc, mmp_l);
 
             // Function for calculating S
-            int calculateS(IEnumerable<Tuple <ulong,int>> stream, HashTable hs) {
-                int S = 0;
+            double calculateS(IEnumerable<Tuple <ulong,int>> stream, HashTable hs) {
+                double S = 0;
 
                 // Inserts all elements of stream into hashtable
                 foreach (var (key,value) in s){
@@ -141,9 +142,23 @@ namespace ImplementationProject
                 }
 
                 // Calculates S
+                LinkedHashEntry[] hashArray = hs.getTable();
+                int hashLength = hs.getArrayLength();
 
+                for (int i = 0; i < hashLength; i++){
+                    LinkedHashEntry currentEntry = hashArray[i];
+
+                    // Goes through all elements hashed to i, and adds their values squared
+                    while(currentEntry != null){
+                        S += Math.Pow(currentEntry.getValue(), 2);
+                        currentEntry = currentEntry.getNext();
+                    }
+                }
                 return S;
             }
+
+            Console.WriteLine("S using multiply shift hashtable: {0}", calculateS(stream, multiplyShiftTable));
+            Console.WriteLine("S using multiply mod prime hashtable: {0}", calculateS(stream, multiplyModPrimeTable));
 
         }
     }

@@ -26,6 +26,10 @@ namespace ImplementationProject
             return this.counterArr;
         }
 
+        public int getArrayLength(){
+            return (int) this.arrayLength;
+        }
+
         // Returns the value x has hashed to if it is in table
         // If x is not in table, 0 is returned
         public int get(ulong x){
