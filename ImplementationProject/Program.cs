@@ -53,13 +53,15 @@ namespace ImplementationProject
             //********************
             Console.WriteLine("\nOpgave 1.c");
             ulong msSum = 0;
-            foreach (var (key,value) in Stream.CreateStream(20,9)){
+
+            IEnumerable<Tuple <ulong,int> > s = Stream.CreateStream(20,9);
+            foreach (var (key,value) in s){
                 msSum += ms.hash(key);
             }
             Console.WriteLine("Sum using multiply-shift: {0}", msSum);
 
             ulong mmpSum = 0;
-            foreach (var (key,value) in Stream.CreateStream(20,9)){
+            foreach (var (key,value) in s){
                 mmpSum += mmp.hash(key);
             }
             Console.WriteLine("Sum using multiply-mod-prime: {0}", mmpSum);
@@ -71,40 +73,78 @@ namespace ImplementationProject
             //********************
             Console.WriteLine("\nOpgave 2");
             // Test af opgave 2
-            int l3 = 2;
-            MultiplyModPrime mmp2 = new MultiplyModPrime(a2, b2, l3);
-            HashTable mmpHashTable = new HashTable(mmp2, l3);
+            // int l3 = 2;
+            // MultiplyModPrime mmp2 = new MultiplyModPrime(a2, b2, l3);
+            // HashTable mmpHashTable = new HashTable(mmp2, l3);
 
-            ulong x1 = 123456;
-            ulong x2 = 4;
-            int v1 = 20;
-            int v2 = -1;
+            // ulong x1 = 123456;
+            // ulong x2 = 4;
+            // int v1 = 20;
+            // int v2 = -1;
 
-            Console.WriteLine("Checking if key {0} is in hash table", x1);
-            Console.WriteLine(mmpHashTable.get(x1));
+            // Console.WriteLine("Checking if key {0} is in hash table", x1);
+            // Console.WriteLine(mmpHashTable.get(x1));
 
-            Console.WriteLine("\nInserting key {0} with value {1} in table, and checking if it's there", x1, v1);
-            mmpHashTable.set(x1, v1);
-            Console.WriteLine("Placement of {0}: {1}", x1, mmpHashTable.get(x1));
+            // Console.WriteLine("\nInserting key {0} with value {1} in table, and checking if it's there", x1, v1);
+            // mmpHashTable.set(x1, v1);
+            // Console.WriteLine("Placement of {0}: {1}", x1, mmpHashTable.get(x1));
 
-            Console.WriteLine("\nChecking the value of key {0}", x1);
-            LinkedHashEntry[] arr1 = mmpHashTable.getTable();
-            int x1Value = arr1[mmpHashTable.get(x1)].getValue();
-            Console.WriteLine("Value of {0}: {1}", x1, x1Value);
+            // Console.WriteLine("\nChecking the value of key {0}", x1);
+            // int x1Value = mmpHashTable.get(x1);
+            // Console.WriteLine("Value of {0}: {1}", x1, x1Value);
 
-            Console.WriteLine("\nIncrementing {0} with {1}, and checking its value", x1, v2);
-            mmpHashTable.increment(x1, v2);
-            x1Value = arr1[mmpHashTable.get(x1)].getValue();    
-            Console.WriteLine("Value of {0} = {1}", x1, x1Value);
+            // Console.WriteLine("\nIncrementing {0} with {1}, and checking its value", x1, v2);
+            // mmpHashTable.increment(x1, v2);
+            // x1Value = mmpHashTable.get(x1);    
+            // Console.WriteLine("Value of {0} = {1}", x1, x1Value);
 
-            Console.WriteLine("\nInserting key {0} using increment where d={1}", x2, v2);
-            mmpHashTable.increment(x2, v2);
+            // Console.WriteLine("\nInserting key {0} using increment where d={1}", x2, v2);
+            // mmpHashTable.increment(x2, v2);
  
-            Console.WriteLine("\nChecking if x2 is in table");
-            Console.WriteLine("Placement of key {0}: {1}", x2, mmpHashTable.get(x2));
+            // Console.WriteLine("\nChecking if x2 is in table using get(x2)");
+            // Console.WriteLine("Value of key {0}: {1}", x2, mmpHashTable.get(x2));
 
-            Console.WriteLine("\nChecking number of elements in {0}", mmpHashTable.get(x2));
-            Console.WriteLine("Elements in hashtable[{0}]: {1}", mmpHashTable.get(x2),  mmpHashTable.getCounterArray()[mmpHashTable.get(x2)]);
+            // Console.WriteLine("\nChecking number of elements in {0} which {1} hashes to", mmp2.hash(x2), x2);
+            // Console.WriteLine("Elements in hashtable[{0}]: {1}", mmp2.hash(x2),  mmpHashTable.getCounterArray()[mmp2.hash(x2)]);
+
+
+            //********************
+            //     Opgave 3
+            //********************
+            // Creating the stream
+            int stream_l = 3;
+            int stream_n = 10;
+            IEnumerable<Tuple <ulong,int> > stream = Stream.CreateStream(stream_n,stream_l);
+
+            // Creating ms hashtable
+            ulong ms_a = 0b10100010_10110001_10000101_11011000_01100111_00110101_01111000_01111011;
+            int ms_l = 62;
+            MultiplyShift msHashFunc = new MultiplyShift(ms_a, ms_l);
+            HashTable multiplyShiftTable = new HashTable(msHashFunc, ms_l);
+
+            // Creating mmp hashtable
+            byte[] mmp_bytes_a = {0b0, 0b01101111, 0b10000110, 0b11010101, 0b10101100, 0b11000111, 0b10010110, 0b01011001, 0b00111010, 0b00110101, 0b10001100, 0b11100111};
+            byte[] mmp_bytes_b = {0b1, 0b00011011, 0b11111000, 0b10111011, 0b11111001, 0b00111111, 0b11011101, 0b11100011, 0b01111100, 0b01100111, 0b11011011, 0b10110011};
+            BigInteger mmp_a = new BigInteger(mmp_bytes_a);
+            BigInteger mmp_b= new BigInteger(mmp_bytes_b);
+            int mmp_l = 62;
+            MultiplyModPrime mmpHashFunc = new MultiplyModPrime(mmp_a, mmp_b, mmp_l);
+            HashTable multiplyModPrimeTable = new HashTable(mmpHashFunc, mmp_l);
+
+            // Function for calculating S
+            int calculateS(IEnumerable<Tuple <ulong,int>> stream, HashTable hs) {
+                int S = 0;
+
+                // Inserts all elements of stream into hashtable
+                foreach (var (key,value) in s){
+                    hs.increment(key, value);
+                }
+
+                // Calculates S
+
+                return S;
+            }
+
         }
     }
 }

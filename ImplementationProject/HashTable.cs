@@ -28,14 +28,14 @@ namespace ImplementationProject
 
         // Returns the value x has hashed to if it is in table
         // If x is not in table, 0 is returned
-        public ulong get(ulong x){
+        public int get(ulong x){
             ulong hx = this.h.hash(x);
             LinkedHashEntry currentEntry = this.hashArr[hx];
 
             // Goes through all elements that hashed to x
             while(currentEntry != null){
                 if (currentEntry.getKey() == x){
-                    return hx;
+                    return currentEntry.getValue();
                 } else {
                     currentEntry = currentEntry.getNext();
                 }
