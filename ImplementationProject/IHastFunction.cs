@@ -1,6 +1,7 @@
+using System.Numerics;
 namespace ImplementationProject
 {
-    public interface IHastFunction
+    public interface IHashFunction
     {
          public ulong hash(ulong x);
     }
