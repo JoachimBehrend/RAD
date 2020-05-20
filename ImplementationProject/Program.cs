@@ -122,7 +122,6 @@ namespace ImplementationProject
             int ms_l = 29;
             MultiplyShift msHashFunc = new MultiplyShift(ms_a, ms_l);
             HashTable multiplyShiftTable = new HashTable(msHashFunc, ms_l);
-
             // Creating mmp hashtable
             byte[] mmp_bytes_a = {0b0, 0b01101111, 0b10000110, 0b11010101, 0b10101100, 0b11000111, 0b10010110, 0b01011001, 0b00111010, 0b00110101, 0b10001100, 0b11100111};
             byte[] mmp_bytes_b = {0b1, 0b00011011, 0b11111000, 0b10111011, 0b11111001, 0b00111111, 0b11011101, 0b11100011, 0b01111100, 0b01100111, 0b11011011, 0b10110011};
@@ -159,6 +158,26 @@ namespace ImplementationProject
 
             Console.WriteLine("S using multiply shift hashtable: {0}", calculateS(stream, multiplyShiftTable));
             Console.WriteLine("S using multiply mod prime hashtable: {0}", calculateS(stream, multiplyModPrimeTable));
+
+
+            //********************
+            //     Test af opgave 4
+            //********************
+
+
+            // Creating 4-universal hashtable
+            byte[] fourU_bytes_a0 = {0b0, 0b00000100, 0b01100100, 0b01001000, 0b10110111, 0b00100101, 0b00100101, 0b10011000, 0b10110000, 0b00001010, 0b01001110, 0b11010000};
+            byte[] fourU_bytes_a1 = {0b0, 0b10000111, 0b11000101, 0b00111011, 0b00000101, 0b10100101, 0b00000110, 0b10100100, 0b10000111, 0b00011000, 0b01011001, 0b11110101};
+            byte[] fourU_bytes_a2 = {0b0, 0b01101111, 0b10000110, 0b11010101, 0b10101100, 0b11000111, 0b10010110, 0b01011001, 0b00111010, 0b00110101, 0b10001100, 0b11100111};
+            byte[] fourU_bytes_a3 = {0b0, 0b00111000, 0b11101101, 0b01011011, 0b10111101, 0b10101011, 0b11100000, 0b10000010, 0b10011011, 0b00100000, 0b11110101, 0b11100111};
+            BigInteger fourU_a0 = new BigInteger(fourU_bytes_a0);
+            BigInteger fourU_a1 = new BigInteger(fourU_bytes_a1);
+            BigInteger fourU_a2 = new BigInteger(fourU_bytes_a2);
+            BigInteger fourU_a3 = new BigInteger(fourU_bytes_a3);
+
+            FourUniversal fourUHashFunc = new FourUniversal(fourU_a0, fourU_a1, fourU_a2, fourU_a3);
+            BigInteger value = fourUHashFunc.hash(ms_a);
+            Console.WriteLine("The hash value is {0}", value);
 
         }
     }
