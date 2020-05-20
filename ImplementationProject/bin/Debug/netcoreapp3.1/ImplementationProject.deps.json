@@ -8,6 +8,8 @@
     ".NETCoreApp,Version=v3.1": {
       "ImplementationProject/1.0.0": {
         "dependencies": {
+          "System.Collections.Generic.RedBlack": "1.3.4618",
+          "System.Numerics.Vectors": "4.6.0-preview5.19224.8",
           "System.Runtime": "4.3.1",
           "System.Runtime.Numerics": "4.3.0"
         },
@@ -17,6 +19,14 @@
       },
       "Microsoft.NETCore.Platforms/1.1.1": {},
       "Microsoft.NETCore.Targets/1.1.3": {},
+      "System.Collections.Generic.RedBlack/1.3.4618": {
+        "runtime": {
+          "lib/net40/System.Collections.Generic.RedBlack.dll": {
+            "assemblyVersion": "1.3.4618.26633",
+            "fileVersion": "1.3.4618.26633"
+          }
+        }
+      },
       "System.Globalization/4.3.0": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "1.1.1",
@@ -33,6 +43,7 @@
           "System.Threading.Tasks": "4.3.0"
         }
       },
+      "System.Numerics.Vectors/4.6.0-preview5.19224.8": {},
       "System.Reflection/4.3.0": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "1.1.1",
@@ -115,6 +126,13 @@
       "path": "microsoft.netcore.targets/1.1.3",
       "hashPath": "microsoft.netcore.targets.1.1.3.nupkg.sha512"
     },
+    "System.Collections.Generic.RedBlack/1.3.4618": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-xAkcqN64K7A7IKSHAi/92y+G/nmYlGFpKm0so8+yovi3+IZ+t/7NolegPVM/4F9tSfnHpHYgwRj83NP9D132Fw==",
+      "path": "system.collections.generic.redblack/1.3.4618",
+      "hashPath": "system.collections.generic.redblack.1.3.4618.nupkg.sha512"
+    },
     "System.Globalization/4.3.0": {
       "type": "package",
       "serviceable": true,
@@ -128,6 +146,13 @@
       "sha512": "sha512-3qjaHvxQPDpSOYICjUoTsmoq5u6QJAFRUITgeT/4gqkF1bajbSmb1kwSxEA8AHlofqgcKJcM8udgieRNhaJ5Cg==",
       "path": "system.io/4.3.0",
       "hashPath": "system.io.4.3.0.nupkg.sha512"
+    },
+    "System.Numerics.Vectors/4.6.0-preview5.19224.8": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-W3rBTrGme5c2Eh4cgn0N7pQCV3Rn8+tX4VDPnXj8X9ZMVD4dVaNytnsovrJ1EVN+OWtyRfHq5nCTI84xqnYt5g==",
+      "path": "system.numerics.vectors/4.6.0-preview5.19224.8",
+      "hashPath": "system.numerics.vectors.4.6.0-preview5.19224.8.nupkg.sha512"
     },
     "System.Reflection/4.3.0": {
       "type": "package",

@@ -20,6 +20,15 @@
           "lib/netstandard1.0/_._": {}
         }
       },
+      "System.Collections.Generic.RedBlack/1.3.4618": {
+        "type": "package",
+        "compile": {
+          "lib/net40/System.Collections.Generic.RedBlack.dll": {}
+        },
+        "runtime": {
+          "lib/net40/System.Collections.Generic.RedBlack.dll": {}
+        }
+      },
       "System.Globalization/4.3.0": {
         "type": "package",
         "dependencies": {
@@ -42,6 +51,15 @@
         },
         "compile": {
           "ref/netstandard1.5/_._": {}
+        }
+      },
+      "System.Numerics.Vectors/4.6.0-preview5.19224.8": {
+        "type": "package",
+        "compile": {
+          "ref/netcoreapp2.0/_._": {}
+        },
+        "runtime": {
+          "lib/netcoreapp2.0/_._": {}
         }
       },
       "System.Reflection/4.3.0": {
@@ -170,6 +188,18 @@
         "microsoft.netcore.targets.1.1.3.nupkg.sha512",
         "microsoft.netcore.targets.nuspec",
         "runtime.json"
+      ]
+    },
+    "System.Collections.Generic.RedBlack/1.3.4618": {
+      "sha512": "xAkcqN64K7A7IKSHAi/92y+G/nmYlGFpKm0so8+yovi3+IZ+t/7NolegPVM/4F9tSfnHpHYgwRj83NP9D132Fw==",
+      "type": "package",
+      "path": "system.collections.generic.redblack/1.3.4618",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net40/System.Collections.Generic.RedBlack.dll",
+        "system.collections.generic.redblack.1.3.4618.nupkg.sha512",
+        "system.collections.generic.redblack.nuspec"
       ]
     },
     "System.Globalization/4.3.0": {
@@ -319,6 +349,53 @@
         "ref/xamarinwatchos10/_._",
         "system.io.4.3.0.nupkg.sha512",
         "system.io.nuspec"
+      ]
+    },
+    "System.Numerics.Vectors/4.6.0-preview5.19224.8": {
+      "sha512": "W3rBTrGme5c2Eh4cgn0N7pQCV3Rn8+tX4VDPnXj8X9ZMVD4dVaNytnsovrJ1EVN+OWtyRfHq5nCTI84xqnYt5g==",
+      "type": "package",
+      "path": "system.numerics.vectors/4.6.0-preview5.19224.8",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/MonoAndroid10/_._",
+        "lib/MonoTouch10/_._",
+        "lib/net46/System.Numerics.Vectors.dll",
+        "lib/net46/System.Numerics.Vectors.xml",
+        "lib/netcoreapp2.0/_._",
+        "lib/netstandard1.0/System.Numerics.Vectors.dll",
+        "lib/netstandard1.0/System.Numerics.Vectors.xml",
+        "lib/netstandard2.0/System.Numerics.Vectors.dll",
+        "lib/netstandard2.0/System.Numerics.Vectors.xml",
+        "lib/portable-net45+win8+wp8+wpa81/System.Numerics.Vectors.dll",
+        "lib/portable-net45+win8+wp8+wpa81/System.Numerics.Vectors.xml",
+        "lib/uap10.0.16299/_._",
+        "lib/xamarinios10/_._",
+        "lib/xamarinmac20/_._",
+        "lib/xamarintvos10/_._",
+        "lib/xamarinwatchos10/_._",
+        "ref/MonoAndroid10/_._",
+        "ref/MonoTouch10/_._",
+        "ref/net45/System.Numerics.Vectors.dll",
+        "ref/net45/System.Numerics.Vectors.xml",
+        "ref/net46/System.Numerics.Vectors.dll",
+        "ref/net46/System.Numerics.Vectors.xml",
+        "ref/netcoreapp2.0/_._",
+        "ref/netstandard1.0/System.Numerics.Vectors.dll",
+        "ref/netstandard1.0/System.Numerics.Vectors.xml",
+        "ref/netstandard2.0/System.Numerics.Vectors.dll",
+        "ref/netstandard2.0/System.Numerics.Vectors.xml",
+        "ref/uap10.0.16299/_._",
+        "ref/xamarinios10/_._",
+        "ref/xamarinmac20/_._",
+        "ref/xamarintvos10/_._",
+        "ref/xamarinwatchos10/_._",
+        "system.numerics.vectors.4.6.0-preview5.19224.8.nupkg.sha512",
+        "system.numerics.vectors.nuspec",
+        "useSharedDesignerContext.txt",
+        "version.txt"
       ]
     },
     "System.Reflection/4.3.0": {
@@ -885,24 +962,26 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
+      "System.Collections.Generic.RedBlack >= 1.3.4618",
+      "System.Numerics.Vectors >= 4.6.0-preview5.19224.8",
       "System.Runtime >= 4.3.1",
       "System.Runtime.Numerics >= 4.3.0"
     ]
   },
   "packageFolders": {
-    "/home/maria/.nuget/packages/": {}
+    "C:\\Users\\JoachimdeLipthayBehr\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/maria/Dropbox/Uni/RAD/RAD/ImplementationProject/ImplementationProject.csproj",
+      "projectUniqueName": "C:\\Users\\JoachimdeLipthayBehr\\Documents\\KU\\RAD\\Git\\RAD\\ImplementationProject\\ImplementationProject.csproj",
       "projectName": "ImplementationProject",
-      "projectPath": "/home/maria/Dropbox/Uni/RAD/RAD/ImplementationProject/ImplementationProject.csproj",
-      "packagesPath": "/home/maria/.nuget/packages/",
-      "outputPath": "/home/maria/Dropbox/Uni/RAD/RAD/ImplementationProject/obj/",
+      "projectPath": "C:\\Users\\JoachimdeLipthayBehr\\Documents\\KU\\RAD\\Git\\RAD\\ImplementationProject\\ImplementationProject.csproj",
+      "packagesPath": "C:\\Users\\JoachimdeLipthayBehr\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\JoachimdeLipthayBehr\\Documents\\KU\\RAD\\Git\\RAD\\ImplementationProject\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/maria/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\JoachimdeLipthayBehr\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
@@ -924,6 +1003,14 @@
     "frameworks": {
       "netcoreapp3.1": {
         "dependencies": {
+          "System.Collections.Generic.RedBlack": {
+            "target": "Package",
+            "version": "[1.3.4618, )"
+          },
+          "System.Numerics.Vectors": {
+            "target": "Package",
+            "version": "[4.6.0-preview5.19224.8, )"
+          },
           "System.Runtime": {
             "target": "Package",
             "version": "[4.3.1, )"
@@ -948,8 +1035,20 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/3.1.202/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.202\\RuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'System.Collections.Generic.RedBlack 1.3.4618' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework '.NETCoreApp,Version=v3.1'. This package may not be fully compatible with your project.",
+      "libraryId": "System.Collections.Generic.RedBlack",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v3.1"
+      ]
+    }
+  ]
 }
