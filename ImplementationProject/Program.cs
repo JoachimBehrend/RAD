@@ -168,30 +168,70 @@ namespace ImplementationProject
             //********************
             //     Opgave 5
             //********************
+            Console.WriteLine("\nOpgave 5");
+
+            
+            // Function that creates h and s
+            Tuple<IHashFunction, IHashFunction>  getCountSketchFunction(IHashFunction g, int t, int b){
+                IHashFunction h = new h(g, t);
+                IHashFunction s = new s(g, b);
+                return Tuple.Create(h,s);
+            }
 
             // TODO: Testing on ms hash function until g is made
+            // ulong ms_a = 0b10100010_10110001_10000101_11011000_01100111_00110101_01111000_01111011;
+            // int ms_l = 29;
+            // IHashFunction g = new MultiplyShift(ms_a, ms_l);
+
+            // // Creating hash functions h and s
+            // int t = 60;
+            // int b = 89;
+            // Tuple<IHashFunction, IHashFunction> hs= getCountSketchFunction(g, t, b);
+            // IHashFunction h = hs.Item1;
+            // IHashFunction s = hs.Item2;
+
+            // // Testing h and s using stream
+            // int stream_l = 9;
+            // int stream_n = 56;
+            // IEnumerable<Tuple <ulong,int> > stream = Stream.CreateStream(stream_n,stream_l);
+
+ 
+            // foreach (var (key,value) in stream){
+            //     if ((long)s.hash(key)< 0){
+            //         Console.WriteLine("h({0}): {1}", key, h.hash(key));
+            //         Console.WriteLine("s({0}): {1}\n", key, (long)s.hash(key));
+            //     }
+            // }
+
+            //********************
+            //     Opgave 6
+            //********************
+            Console.WriteLine("\nOpgave 6");
+            // Creating g (Testing on ms until g is implemented)
             ulong ms_a = 0b10100010_10110001_10000101_11011000_01100111_00110101_01111000_01111011;
             int ms_l = 29;
             IHashFunction g = new MultiplyShift(ms_a, ms_l);
 
             // Creating h and s
-            int t = 60;
-            CountSketchHashFunctions countHashFunctions = new CountSketchHashFunctions(g, t);
-            Tuple<IHashFunction, IHashFunction> hs= countHashFunctions.getFunctions();
+            int t = 29;
+            int b = 89;
+            Tuple<IHashFunction, IHashFunction> hs= getCountSketchFunction(g, t, b);
             IHashFunction h = hs.Item1;
             IHashFunction s = hs.Item2;
 
-            // Testing h and s using stream
+            // Creating stream
             int stream_l = 9;
             int stream_n = 56;
             IEnumerable<Tuple <ulong,int> > stream = Stream.CreateStream(stream_n,stream_l);
 
+
+            // Creating Count Sketch
+            BasicCountSketch bsc = new BasicCountSketch(h, s, t);
             foreach (var (key,value) in stream){
-                if (s.hash(key)<0){
-                    Console.WriteLine("h({0}): {1}", key, h.hash(key));
-                    Console.WriteLine("s({0}): {1}\n", key, s.hash(key));
-                }
+                bsc.Process(key, value);
             }
+            double X = bsc.getSecondMoment();
+            Console.WriteLine("X: {0}", X);
         }
     }
 }
