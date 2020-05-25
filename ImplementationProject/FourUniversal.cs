@@ -21,23 +21,28 @@ namespace ImplementationProject
             this.p = BigInteger.Pow(2, b)-1;
         }
 
-        public BigInteger hash(ulong x) {
+        public ulong hash(ulong x) {
             BigInteger[] ai = new BigInteger[] {a0, a1, a2, a3};
 
-            BigInteger y =  (q - 1);
-            for(int i = 0; i < q; i++){
+            BigInteger y =  ai[q - 1];
+            Console.WriteLine("2");
+
+            Console.WriteLine("The 0 valueof y is {0}", y);
+
+            for(int i = (q - 2); i >= 0; i--){
+                Console.WriteLine("The value of ai is {0}", ai[i]);
                 y = y * x + ai[i];
-                y = BigInteger.Add((y&p), (y >> b));
-            }
+                y = BigInteger.Add((y&this.p), (y >> this.b));
+                Console.WriteLine("The 1, {0} valueof y is {1}", i, y);
+                if (y >= this.p){
+                    y -= this.p;
+                }
 
-            if (y >= p){
-                y -= p;
             }
-            Console.WriteLine("The hash value is: {0}", y);
+            Console.WriteLine("The 1 value of y is: {0}", y);
+            Console.WriteLine("The 2 value of y is: {0}", y);
 
-            ulong hashvalue = (ulong) y;
-            return (ulong)hashvalue;
+            return (ulong)y;
         }
-
     }
 }
