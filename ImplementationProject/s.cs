@@ -13,7 +13,7 @@ namespace ImplementationProject
 
         public ulong hash(ulong x){
             ulong bx = g.hash(x) >> (t-1);
-            Console.Writeline(bx);
+            Console.WriteLine(bx);
             ulong sx = 1-2*bx;
             return sx;
         }

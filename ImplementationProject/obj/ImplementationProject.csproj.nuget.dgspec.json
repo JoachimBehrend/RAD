@@ -1,20 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "/home/maria/Dropbox/Uni/RAD/RAD/ImplementationProject/ImplementationProject.csproj": {}
+    "/home/martin/Dropbox/Uni/RAD/ImplementationProject/ImplementationProject.csproj": {}
   },
   "projects": {
-    "/home/maria/Dropbox/Uni/RAD/RAD/ImplementationProject/ImplementationProject.csproj": {
+    "/home/martin/Dropbox/Uni/RAD/ImplementationProject/ImplementationProject.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/maria/Dropbox/Uni/RAD/RAD/ImplementationProject/ImplementationProject.csproj",
+        "projectUniqueName": "/home/martin/Dropbox/Uni/RAD/ImplementationProject/ImplementationProject.csproj",
         "projectName": "ImplementationProject",
-        "projectPath": "/home/maria/Dropbox/Uni/RAD/RAD/ImplementationProject/ImplementationProject.csproj",
-        "packagesPath": "/home/maria/.nuget/packages/",
-        "outputPath": "/home/maria/Dropbox/Uni/RAD/RAD/ImplementationProject/obj/",
+        "projectPath": "/home/martin/Dropbox/Uni/RAD/ImplementationProject/ImplementationProject.csproj",
+        "packagesPath": "/home/martin/.nuget/packages/",
+        "outputPath": "/home/martin/Dropbox/Uni/RAD/ImplementationProject/obj/",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "/usr/share/dotnet/sdk/NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "/home/maria/.nuget/NuGet/NuGet.Config"
+          "/home/martin/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
@@ -60,7 +63,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/3.1.202/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/3.1.101/RuntimeIdentifierGraph.json"
         }
       }
     }
