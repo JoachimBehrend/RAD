@@ -2,7 +2,7 @@ using System;
 using System.Numerics;
 namespace ImplementationProject
 {
-    public class FourUniversal : IHashFunction
+    public class FourUniversal
     {
         protected BigInteger a0;
         protected BigInteger a1;
@@ -21,28 +21,20 @@ namespace ImplementationProject
             this.p = BigInteger.Pow(2, b)-1;
         }
 
-        public ulong hash(ulong x) {
+        public BigInteger hash(ulong x) {
             BigInteger[] ai = new BigInteger[] {a0, a1, a2, a3};
-
             BigInteger y =  ai[q - 1];
-            Console.WriteLine("2");
-
-            Console.WriteLine("The 0 valueof y is {0}", y);
 
             for(int i = (q - 2); i >= 0; i--){
-                Console.WriteLine("The value of ai is {0}", ai[i]);
                 y = y * x + ai[i];
                 y = BigInteger.Add((y&this.p), (y >> this.b));
-                Console.WriteLine("The 1, {0} valueof y is {1}", i, y);
-                if (y >= this.p){
-                    y -= this.p;
-                }
 
             }
-            Console.WriteLine("The 1 value of y is: {0}", y);
-            Console.WriteLine("The 2 value of y is: {0}", y);
+            if (y >= this.p){
+                y -= this.p;
+            }
 
-            return (ulong)y;
+            return y;
         }
     }
 }
