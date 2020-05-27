@@ -2,7 +2,7 @@ using System;
 using System.Numerics;
 namespace ImplementationProject
 {
-    public class MultiplyModPrime : IHashFunction
+    public class MultiplyModPrime : ISimpleHashFunction
     {
         protected BigInteger a;
         protected BigInteger b;

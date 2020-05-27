@@ -4,12 +4,12 @@ namespace ImplementationProject
 {
     public class BasicCountSketch
     {
-        protected IHashFunction h;
-        protected IHashFunction s;
+        protected hCountSketchHashFunc h;
+        protected sCountSketchHashFunc s;
         protected long[] C;
         protected ulong m;
 
-        public BasicCountSketch(IHashFunction h, IHashFunction s, int t){
+        public BasicCountSketch(hCountSketchHashFunc h, sCountSketchHashFunc s, int t){
             this.m = (ulong) Math.Pow(2,t);
             this.h = h;
             this.s = s;
