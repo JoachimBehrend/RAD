@@ -14,26 +14,11 @@ namespace ImplementationProject
             //********************
             //     Opgave 1.a
             //********************
-<<<<<<< HEAD
-            //Console.WriteLine("Opgave 1.a: Generering af multiply-shift hashing");
-            // Defining a and l parameters
-            // Creating the uneven random 64 bit number a via random.org by creating a 8 byte number and changing the last bit to 1
-            ulong a1 = 0b01011101_00010011_00100101_11111001_00111001_11111101_11000100_11101111;
-            int l1 = 62;
-
-            // // Setting up hash function
-            MultiplyShift ms = new MultiplyShift(a1,l1);
-
-            // Test
-            ulong x1 = 9;
-            Console.WriteLine("h({0}): {1}", x1, ms.hash(x1));
-=======
             // Console.WriteLine("Opgave 1.a: Generering af multiply-shift hashing");
             // Defining a and l parameters
             // Creating the uneven random 64 bit number a via random.org by creating a 8 byte number and changing the last bit to 1
             ulong ms_a = 0b10100010_10110001_10000101_11011000_01100111_00110101_01111000_01111011;
             int ms_l = 5;
->>>>>>> 4d9c23780ec8df26552b8d59ff91e1c19f9a8e6c
 
             // Setting up hash function
             MultiplyShift msHashFunc = new MultiplyShift(ms_a, ms_l);
@@ -57,27 +42,27 @@ namespace ImplementationProject
             //********************
             //     Opgave 1.c 
             //********************
-            Console.WriteLine("\nOpgave 1.c");
-            Stopwatch stopwatch = new Stopwatch();
-            stopwatch.Start();
-            ulong msSum = 0;
-            IEnumerable<Tuple <ulong,int> > s = Stream.CreateStream(200000,9);
-            foreach (var (key,value) in s){
-                msSum += ms.hash(key);
-            }
-            Console.WriteLine("Sum using multiply-shift: {0}", msSum);
-            stopwatch.Stop();
-            Console.WriteLine("Time in millisec, multiply-shift: {0} \n", stopwatch.Elapsed.TotalMilliseconds);
+            // Console.WriteLine("\nOpgave 1.c");
+            // Stopwatch stopwatch = new Stopwatch();
+            // stopwatch.Start();
+            // ulong msSum = 0;
+            IEnumerable<Tuple <ulong,int> > stream = Stream.CreateStream(200000,9);
+            // foreach (var (key,value) in s){
+            //     msSum += msHashFunc.hash(key);
+            // }
+            // Console.WriteLine("Sum using multiply-shift: {0}", msSum);
+            // stopwatch.Stop();
+            // Console.WriteLine("Time in millisec, multiply-shift: {0} \n", stopwatch.Elapsed.TotalMilliseconds);
 
 
-            stopwatch.Restart();
-            ulong mmpSum = 0;
-            foreach (var (key,value) in s){
-               mmpSum += mmp.hash(key);
-            }
-            Console.WriteLine("Sum using multiply-mod-prime: {0}", mmpSum);
-            stopwatch.Stop();
-            Console.WriteLine("Time in millisec, multiply-mod-prime: {0}", stopwatch.Elapsed.TotalMilliseconds);
+            // stopwatch.Restart();
+            // ulong mmpSum = 0;
+            // foreach (var (key,value) in s){
+            //    mmpSum += mmpHashFunc.hash(key);
+            // }
+            // Console.WriteLine("Sum using multiply-mod-prime: {0}", mmpSum);
+            // stopwatch.Stop();
+            // Console.WriteLine("Time in millisec, multiply-mod-prime: {0}", stopwatch.Elapsed.TotalMilliseconds);
 
             
             
@@ -99,10 +84,10 @@ namespace ImplementationProject
             //********************
             //     Opgave 3
             //********************
-            Console.WriteLine("\nOpgave 3");
+            // Console.WriteLine("\nOpgave 3");
             // // Creating the stream
-            int stream_l = 5;
-            int stream_n = 1000000;
+            int stream_l = 29;
+            int stream_n = 200;
             stream = Stream.CreateStream(stream_n,stream_l);
 
 
@@ -131,8 +116,10 @@ namespace ImplementationProject
                 return S;
             }
 
-            Console.WriteLine("S using multiply shift hashtable: {0}", calculateS(stream, multiplyShiftTable));
-            Console.WriteLine("S using multiply mod prime hashtable: {0}", calculateS(stream, multiplyModPrimeTable));
+            double correctS = calculateS(stream, multiplyShiftTable);
+
+            // Console.WriteLine("S using multiply shift hashtable: {0}", calculateS(stream, multiplyShiftTable));
+            // Console.WriteLine("S using multiply mod prime hashtable: {0}", calculateS(stream, multiplyModPrimeTable));
 
             // //********************
             // //     Opgave 4
@@ -158,11 +145,11 @@ namespace ImplementationProject
             // //********************
             // //Console.WriteLine("\nOpgave 5");            
             // // // Function that creates h and s
-            // Tuple<hCountSketchHashFunc, sCountSketchHashFunc>  getCountSketchFunction(FourUniversal g, int t, int b){
-            //     hCountSketchHashFunc h = new hCountSketchHashFunc(g, t);
-            //     sCountSketchHashFunc s = new sCountSketchHashFunc(g, b);
-            //     return Tuple.Create(h,s);
-            // }
+            Tuple<hCountSketchHashFunc, sCountSketchHashFunc>  getCountSketchFunction(FourUniversal g, int t, int b){
+                hCountSketchHashFunc h = new hCountSketchHashFunc(g, t);
+                sCountSketchHashFunc s = new sCountSketchHashFunc(g, b);
+                return Tuple.Create(h,s);
+            }
 
 
             // //********************
@@ -192,36 +179,81 @@ namespace ImplementationProject
             // Console.WriteLine("X: {0}", X);
 
 
-            // Random rnd = new System.Random();
-            // Byte [] bytes = new Byte [12];
-            // rnd . NextBytes ( bytes ) ;
 
-            List<byte[]> byte_array = new List<byte[]>();
-            using (StreamReader sr = new StreamReader("./randomBits.txt"))
-            {
-                int idx = 0;
-                while(sr.Peek() >= 0){
-                    string byte_string = ""; 
-                    int i = 0; 
-                    while(i < 89) {
-                        if(sr.Peek() >= 0){
-                            char c = (char)sr.Read();
-                            if(c != '\n'){
-                                byte_string = byte_string + (char)sr.Read();
-                                i++; 
+
+            // //********************
+            // //     Opgave 7
+            // //********************
+            Console.WriteLine("\nOpgave 7");
+            Console.WriteLine("Correct answer: {0}", correctS);
+
+            // Print so points can easily be copy pasted as csv file
+            Console.WriteLine("\nExperiment;Estimation");
+            double calculateCountSketchEstimator(IEnumerable<Tuple <ulong,int>> stream, BigInteger a0, BigInteger a1, BigInteger a2, BigInteger a3, int t){
+                // Setting up functions
+                int b = 89;
+                FourUniversal g = new FourUniversal(a0, a1, a2, a3);
+                Tuple<hCountSketchHashFunc, sCountSketchHashFunc> hs= getCountSketchFunction(g, t, b);
+                hCountSketchHashFunc h = hs.Item1;
+                sCountSketchHashFunc s = hs.Item2;
+
+                BasicCountSketch bsc = new BasicCountSketch(h, s, t);
+                foreach (var (key,value) in stream){
+                    bsc.Process(key, value);
+                }
+                double X = bsc.getSecondMoment();
+                return X;
+            }
+
+            // Array for estimators
+            double[] X = new double[100];
+
+            // Function that performs experiment
+            void performExperiment (IEnumerable<Tuple <ulong,int>> stream, int t){
+                int [] randomVariables = new int[4];
+
+                // Reads through file randomBits to get the random variables
+                using (StreamReader sr = new StreamReader("./randomBits.txt"))
+                {
+                    // Counter is number of experiments. idx is index for randomvariables
+                    int counter = 0;
+                    int idx = 0;
+
+                    // Reads through file
+                    while(sr.Peek() >= 0){
+                        string byte_string = ""; 
+                        int i = 0; 
+                        while(i < 89) {
+                            if(sr.Peek() >= 0){
+                                char c = (char)sr.Read();
+                                if(c != '\n'){
+                                    byte_string = byte_string + (char)sr.Read();
+                                    i++; 
+                                }
                             }
                         }
-                    }
-                    byte[] b = Encoding.ASCII.GetBytes(byte_string);
-                    // string someString = Encoding.ASCII.GetString(b);
-                    //byte_array.Add(b);if (BitConverter.IsLittleEndian)
-                    Array.Reverse(b);
+                        byte[] b = Encoding.ASCII.GetBytes(byte_string);
+                        Array.Reverse(b);
 
-                    int ival = BitConverter.ToInt32(b, 0);
-                    Console.WriteLine("index {1} int: {0}", ival, idx);
-                    idx++;
+                        int ival = BitConverter.ToInt32(b, 0);
+                        randomVariables[idx] = ival;
+
+                        // Performs new experiment when 4 random bits have been acquired 
+                        if (idx == 3){
+                            X[counter] = calculateCountSketchEstimator(stream,randomVariables[0], randomVariables[1], randomVariables[2], randomVariables[3], t);
+                            idx = 0;
+                            Console.WriteLine("{0};{1}", counter, X[counter]);
+                            counter++;
+
+                        } else {
+                            idx++;
+                        }
+                    }
                 }
             }
+
+            performExperiment(stream, 10);
+
         }
             
     }
