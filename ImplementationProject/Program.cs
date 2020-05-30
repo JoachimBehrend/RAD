@@ -220,7 +220,7 @@ namespace ImplementationProject
                     int idx = 0;
 
                     // Reads through file
-                    while(sr.Peek() >= 0){
+                    while(sr.Peek() >= 0 && counter < 100){
                         string byte_string = ""; 
                         int i = 0; 
                         while(i < 89) {
