@@ -18,7 +18,7 @@ namespace ImplementationProject
             // Defining a and l parameters
             // Creating the uneven random 64 bit number a via random.org by creating a 8 byte number and changing the last bit to 1
             ulong ms_a = 0b10100010_10110001_10000101_11011000_01100111_00110101_01111000_01111011;
-            int ms_l = 5;
+            int ms_l = 29;
 
             // Setting up hash function
             MultiplyShift msHashFunc = new MultiplyShift(ms_a, ms_l);
@@ -33,7 +33,7 @@ namespace ImplementationProject
             byte[] mmp_bytes_b = {0b1, 0b00011011, 0b11111000, 0b10111011, 0b11111001, 0b00111111, 0b11011101, 0b11100011, 0b01111100, 0b01100111, 0b11011011, 0b10110011};
             BigInteger mmp_a = new BigInteger(mmp_bytes_a);
             BigInteger mmp_b= new BigInteger(mmp_bytes_b);
-            int mmp_l = 5;
+            int mmp_l = 29;
 
             // // Setting up hash function
             MultiplyModPrime mmpHashFunc = new MultiplyModPrime(mmp_a, mmp_b, mmp_l);
@@ -116,7 +116,7 @@ namespace ImplementationProject
                 return S;
             }
 
-            double correctS = calculateS(stream, multiplyShiftTable);
+            // double correctS = calculateS(stream, multiplyShiftTable);
 
             // Console.WriteLine("S using multiply shift hashtable: {0}", calculateS(stream, multiplyShiftTable));
             // Console.WriteLine("S using multiply mod prime hashtable: {0}", calculateS(stream, multiplyModPrimeTable));
@@ -185,10 +185,8 @@ namespace ImplementationProject
             // //     Opgave 7
             // //********************
             Console.WriteLine("\nOpgave 7");
-            Console.WriteLine("Correct answer: {0}", correctS);
+            // Console.WriteLine("Correct answer: {0}", correctS);
 
-            // Print so points can easily be copy pasted as csv file
-            Console.WriteLine("\nExperiment;Estimation");
             double calculateCountSketchEstimator(IEnumerable<Tuple <ulong,int>> stream, BigInteger a0, BigInteger a1, BigInteger a2, BigInteger a3, int t){
                 // Setting up functions
                 int b = 89;
@@ -211,48 +209,81 @@ namespace ImplementationProject
             // Function that performs experiment
             void performExperiment (IEnumerable<Tuple <ulong,int>> stream, int t){
                 int [] randomVariables = new int[4];
+                
+                // Prints results in to text file
+                string fileName = "./experiment" + t + ".csv";
+                using (StreamWriter file = new StreamWriter(fileName)){
+                    // Formats so points can easily be copy pasted as csv file
+                    // file.WriteLine("Experiment;Estimation");
 
-                // Reads through file randomBits to get the random variables
-                using (StreamReader sr = new StreamReader("./randomBits.txt"))
-                {
-                    // Counter is number of experiments. idx is index for randomvariables
-                    int counter = 0;
-                    int idx = 0;
+                    // Reads through file randomBits to get the random variables
+                    using (StreamReader sr = new StreamReader("./randomBits.txt"))
+                    {
+                        // Counter is number of experiments. idx is index for randomvariables
+                        int counter = 0;
+                        int idx = 0;
 
-                    // Reads through file
-                    while(sr.Peek() >= 0 && counter < 100){
-                        string byte_string = ""; 
-                        int i = 0; 
-                        while(i < 89) {
-                            if(sr.Peek() >= 0){
-                                char c = (char)sr.Read();
-                                if(c != '\n'){
-                                    byte_string = byte_string + (char)sr.Read();
-                                    i++; 
+                        // Reads through file
+                        while(sr.Peek() >= 0 && counter < 100){
+                            string byte_string = ""; 
+                            int i = 0; 
+                            while(i < 89) {
+                                if(sr.Peek() >= 0){
+                                    char c = (char)sr.Read();
+                                    if(c != '\n'){
+                                        byte_string = byte_string + (char)sr.Read();
+                                        i++; 
+                                    }
                                 }
                             }
-                        }
-                        byte[] b = Encoding.ASCII.GetBytes(byte_string);
-                        Array.Reverse(b);
+                            byte[] b = Encoding.ASCII.GetBytes(byte_string);
+                            Array.Reverse(b);
 
-                        int ival = BitConverter.ToInt32(b, 0);
-                        randomVariables[idx] = ival;
+                            int ival = BitConverter.ToInt32(b, 0);
+                            randomVariables[idx] = ival;
 
-                        // Performs new experiment when 4 random variables have been acquired 
-                        if (idx == 3){
-                            X[counter] = calculateCountSketchEstimator(stream,randomVariables[0], randomVariables[1], randomVariables[2], randomVariables[3], t);
-                            idx = 0;
-                            Console.WriteLine("{0};{1}", counter, X[counter]);
-                            counter++;
+                            // Performs new experiment when 4 random variables have been acquired 
+                            if (idx == 3){
+                                X[counter] = calculateCountSketchEstimator(stream,randomVariables[0], randomVariables[1], randomVariables[2], randomVariables[3], t);
+                                idx = 0;
+                                file.WriteLine("{0};{1}", counter, X[counter]);
+                                counter++;
 
-                        } else {
-                            idx++;
+                            } else {
+                                idx++;
+                            }
                         }
                     }
                 }
             }
 
-            performExperiment(stream, 10);
+            // Print so points can easily be copy pasted as csv file
+            int t = 20;
+            Console.WriteLine("t = {0}", t);
+            performExperiment(stream, t);
+            Console.WriteLine("Experiment done");
+
+
+
+            // //********************
+            // //     Opgave 8
+            // //********************
+            Console.WriteLine("\nOpgave 8");
+            t = 5;
+            Console.WriteLine("t = {0}", t);
+            performExperiment(stream, t);
+            Console.WriteLine("Experiment done");
+
+
+            t = 10;
+            Console.WriteLine("t = {0}", t);
+            performExperiment(stream, t);
+            Console.WriteLine("Experiment done");
+
+            t = 30;
+            Console.WriteLine("t = {0}", t);
+            performExperiment(stream, t);
+            Console.WriteLine("Experiment done");
 
         }
             
