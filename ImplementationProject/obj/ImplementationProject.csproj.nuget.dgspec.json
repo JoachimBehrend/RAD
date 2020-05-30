@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/mnt/c/Users/JoachimdeLipthayBehr/Documents/KU/RAD/Git/RAD/ImplementationProject/ImplementationProject.csproj": {}
+    "C:\\Users\\JoachimdeLipthayBehr\\Documents\\KU\\RAD\\Git\\RAD\\ImplementationProject\\ImplementationProject.csproj": {}
   },
   "projects": {
-    "/mnt/c/Users/JoachimdeLipthayBehr/Documents/KU/RAD/Git/RAD/ImplementationProject/ImplementationProject.csproj": {
+    "C:\\Users\\JoachimdeLipthayBehr\\Documents\\KU\\RAD\\Git\\RAD\\ImplementationProject\\ImplementationProject.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/mnt/c/Users/JoachimdeLipthayBehr/Documents/KU/RAD/Git/RAD/ImplementationProject/ImplementationProject.csproj",
+        "projectUniqueName": "C:\\Users\\JoachimdeLipthayBehr\\Documents\\KU\\RAD\\Git\\RAD\\ImplementationProject\\ImplementationProject.csproj",
         "projectName": "ImplementationProject",
-        "projectPath": "/mnt/c/Users/JoachimdeLipthayBehr/Documents/KU/RAD/Git/RAD/ImplementationProject/ImplementationProject.csproj",
-        "packagesPath": "/home/jlb/.nuget/packages/",
-        "outputPath": "/mnt/c/Users/JoachimdeLipthayBehr/Documents/KU/RAD/Git/RAD/ImplementationProject/obj/",
+        "projectPath": "C:\\Users\\JoachimdeLipthayBehr\\Documents\\KU\\RAD\\Git\\RAD\\ImplementationProject\\ImplementationProject.csproj",
+        "packagesPath": "C:\\Users\\JoachimdeLipthayBehr\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\JoachimdeLipthayBehr\\Documents\\KU\\RAD\\Git\\RAD\\ImplementationProject\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/jlb/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\JoachimdeLipthayBehr\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
@@ -68,7 +68,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/3.1.202/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.202\\RuntimeIdentifierGraph.json"
         }
       }
     }

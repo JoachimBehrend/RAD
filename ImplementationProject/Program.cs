@@ -14,26 +14,11 @@ namespace ImplementationProject
             //********************
             //     Opgave 1.a
             //********************
-<<<<<<< HEAD
-            //Console.WriteLine("Opgave 1.a: Generering af multiply-shift hashing");
-            // Defining a and l parameters
-            // Creating the uneven random 64 bit number a via random.org by creating a 8 byte number and changing the last bit to 1
-            ulong a1 = 0b01011101_00010011_00100101_11111001_00111001_11111101_11000100_11101111;
-            int l1 = 62;
-
-            // // Setting up hash function
-            MultiplyShift ms = new MultiplyShift(a1,l1);
-
-            // Test
-            ulong x1 = 9;
-            Console.WriteLine("h({0}): {1}", x1, ms.hash(x1));
-=======
             // Console.WriteLine("Opgave 1.a: Generering af multiply-shift hashing");
             // Defining a and l parameters
             // Creating the uneven random 64 bit number a via random.org by creating a 8 byte number and changing the last bit to 1
             ulong ms_a = 0b10100010_10110001_10000101_11011000_01100111_00110101_01111000_01111011;
             int ms_l = 5;
->>>>>>> 4d9c23780ec8df26552b8d59ff91e1c19f9a8e6c
 
             // Setting up hash function
             MultiplyShift msHashFunc = new MultiplyShift(ms_a, ms_l);
@@ -63,7 +48,7 @@ namespace ImplementationProject
             ulong msSum = 0;
             IEnumerable<Tuple <ulong,int> > s = Stream.CreateStream(200000,9);
             foreach (var (key,value) in s){
-                msSum += ms.hash(key);
+                msSum += msHashFunc.hash(key);
             }
             Console.WriteLine("Sum using multiply-shift: {0}", msSum);
             stopwatch.Stop();
@@ -73,7 +58,7 @@ namespace ImplementationProject
             stopwatch.Restart();
             ulong mmpSum = 0;
             foreach (var (key,value) in s){
-               mmpSum += mmp.hash(key);
+               mmpSum += mmpHashFunc.hash(key);
             }
             Console.WriteLine("Sum using multiply-mod-prime: {0}", mmpSum);
             stopwatch.Stop();
@@ -103,7 +88,7 @@ namespace ImplementationProject
             // // Creating the stream
             int stream_l = 5;
             int stream_n = 1000000;
-            stream = Stream.CreateStream(stream_n,stream_l);
+            IEnumerable<Tuple <ulong,int> > stream = Stream.CreateStream(stream_n,stream_l);
 
 
             // // Function for calculating S
@@ -214,7 +199,8 @@ namespace ImplementationProject
                     }
                     byte[] b = Encoding.ASCII.GetBytes(byte_string);
                     // string someString = Encoding.ASCII.GetString(b);
-                    //byte_array.Add(b);if (BitConverter.IsLittleEndian)
+                    byte_array.Add(b);
+                    //if (BitConverter.IsLittleEndian)
                     Array.Reverse(b);
 
                     int ival = BitConverter.ToInt32(b, 0);
