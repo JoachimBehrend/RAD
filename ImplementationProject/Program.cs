@@ -46,7 +46,7 @@ namespace ImplementationProject
             // Stopwatch stopwatch = new Stopwatch();
             // stopwatch.Start();
             // ulong msSum = 0;
-            IEnumerable<Tuple <ulong,int> > stream = Stream.CreateStream(200000,9);
+            // IEnumerable<Tuple <ulong,int> > stream = Stream.CreateStream(200000,9);
             // foreach (var (key,value) in s){
             //     msSum += msHashFunc.hash(key);
             // }
@@ -86,9 +86,9 @@ namespace ImplementationProject
             //********************
             // Console.WriteLine("\nOpgave 3");
             // // Creating the stream
+            int stream_n = 1000000;
             int stream_l = 29;
-            int stream_n = 200;
-            stream = Stream.CreateStream(stream_n,stream_l);
+            IEnumerable<Tuple <ulong,int> > stream = Stream.CreateStream(stream_n,stream_l);
 
 
             // // Function for calculating S
@@ -238,7 +238,7 @@ namespace ImplementationProject
                         int ival = BitConverter.ToInt32(b, 0);
                         randomVariables[idx] = ival;
 
-                        // Performs new experiment when 4 random bits have been acquired 
+                        // Performs new experiment when 4 random variables have been acquired 
                         if (idx == 3){
                             X[counter] = calculateCountSketchEstimator(stream,randomVariables[0], randomVariables[1], randomVariables[2], randomVariables[3], t);
                             idx = 0;
