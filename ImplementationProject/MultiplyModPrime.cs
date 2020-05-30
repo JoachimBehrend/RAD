@@ -2,7 +2,7 @@ using System;
 using System.Numerics;
 namespace ImplementationProject
 {
-    public class MultiplyModPrime : IHashFunction
+    public class MultiplyModPrime : ISimpleHashFunction
     {
         protected BigInteger a;
         protected BigInteger b;
@@ -21,8 +21,8 @@ namespace ImplementationProject
 
             // Calculating (a*x+b) mod p by ((a*x+b)&p) + (x>>q)
             // From exercise 2.7 and 2.8
-            BigInteger v1 =BigInteger.Add(BigInteger.Multiply(this.a, x), this.b); //((this.a*x + this.b);
-            BigInteger y = BigInteger.Add((v1&this.p),(x >> this.q));
+            BigInteger v1 = BigInteger.Add(BigInteger.Multiply(this.a, x), this.b); //((this.a*x + this.b);
+            BigInteger y  = BigInteger.Add((v1&this.p),(x >> this.q));
 
             if (y>=this.p){
                 y -= this.p;

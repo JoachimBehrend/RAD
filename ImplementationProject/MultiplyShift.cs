@@ -1,7 +1,7 @@
 using System.Numerics;
 namespace ImplementationProject
 {
-    public class MultiplyShift : IHashFunction
+    public class MultiplyShift : ISimpleHashFunction
     {
         protected ulong a;
         protected int l;

@@ -4,26 +4,20 @@ namespace ImplementationProject
 {
     public class HashTable
     {   
-        protected IHashFunction h;
+        protected ISimpleHashFunction h;
         protected double arrayLength; 
         protected LinkedHashEntry[] hashArr;
         // Used for checking correctness
-        protected int[] counterArr;
-        public HashTable(IHashFunction hashFunction, double l){
+        public HashTable(ISimpleHashFunction hashFunction, double l){
             // Initializes hashfunction and creates array
             this.h = hashFunction;
             this.arrayLength = Math.Pow(2.0, l);
             this.hashArr = new LinkedHashEntry[(int)arrayLength];
-            this.counterArr = new int[(int)arrayLength];
         }
 
         // Used for checking correctness of methods
         public LinkedHashEntry[] getTable(){
             return this.hashArr;
-        }
-
-        public int[] getCounterArray(){
-            return this.counterArr;
         }
 
         public int getArrayLength(){
@@ -71,7 +65,6 @@ namespace ImplementationProject
             // If there are no other elements that hash to x, then x is inserted as first element
             if (xFound == 0){
                 LinkedHashEntry newEntry = new LinkedHashEntry(x, v);
-                counterArr[hx] += 1;
                 if (previousEntry == null){
                     this.hashArr[hx] = newEntry;
                 } else {
@@ -103,7 +96,6 @@ namespace ImplementationProject
             // If there are no other elements that hash to x, then x is inserted as first element
             if (xFound == 0){
                 LinkedHashEntry newEntry = new LinkedHashEntry(x, d);
-                counterArr[hx] += 1;
                 
                 if (previousEntry == null){
                     this.hashArr[hx] = newEntry;
