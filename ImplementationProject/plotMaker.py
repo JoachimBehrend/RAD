@@ -2,33 +2,38 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # load data
-t10_data = np.loadtxt("experiment20.csv", delimiter=";")
-X = t10_data[:,-1].reshape((len(t10_data[:,-1]),1))
+t = 18
+file = "./Experiments/experiment" + (str)(t) + ".csv"
+data = np.loadtxt(file, delimiter=";")
+X = data[:,-1].reshape((len(data[:,-1]),1))
 sortedX = sorted(X)
-S = np.full((100,1), 1000000)
-
+S = np.full((100,1), 100000)
 xNumbers = np.arange(0,100)
 
-# plt.scatter(xNumbers,sortedX, 10)
-# plt.axhline(y=1000000, color='r', linestyle='-')
-# plt.ylabel("Estimates")
-# plt.xlabel("X")
-# plt.show()
+# Makes first plot
+plt.scatter(xNumbers,sortedX, 10)
+plt.axhline(y=S[0], color='r', linestyle='-')
+plt.ylabel("Estimates")
+plt.xlabel("X")
+plt.title('Estimates, t = %i' %t)
+plt.show()
 
-
+# Calculates mean square error
 def mse(X, S):
     s = 0.0
     for i in range (100):
         s += (X[i]-S[i])**2/100
     return s
 
-var = 2*1000000**2/2**20
-# print("Mean-square error: %16f" % mse(X,S))
-# print("Var: %16f" % var)
-# print("Diff: %16f" % (var-mse(X,S)))
-# print("Mean: " + (str)(np.mean(X)))
-# print("Diff: " + (str)(1000000-np.mean(X)))
+# Prints mean and mean square variance
+actualVariance = 2*S[0]**2/2**t
+print("Mean: " + (str)(np.mean(X)))
+print("Diff: " + (str) (abs(S[0]-np.mean(X))/S[0]*100))
+print("MSE : %16f" % mse(X,S))
+print("Var:  %16f" % actualVariance)
+print("Diff: %16f" % (abs(actualVariance-mse(X,S))/actualVariance*100))
 
+# Groups data
 G = []
 G.append(X[:11])
 G.append(X[11:22])
@@ -40,17 +45,18 @@ G.append(X[66:77])
 G.append(X[77:88])
 G.append(X[88:99])
 
+# Gets median of all groups
 M = []
 for x in G:
     M.append((np.mean(x)))
-
-print(M)
 sortedM = sorted(M)
 mNumbers = np.arange(0,9)
 
+# Plots
 plt.ticklabel_format(useOffset=False)
 plt.scatter(mNumbers,sortedM)
-plt.axhline(y=1000000, color='r', linestyle='-')
+plt.axhline(y=S[0], color='r', linestyle='-')
 plt.ylabel("Estimates")
 plt.xlabel("M")
+plt.title('Median estimates, t = %i' %t)
 plt.show()

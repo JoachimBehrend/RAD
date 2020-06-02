@@ -67,9 +67,6 @@ namespace ImplementationProject
             
             
             
-
-
-            
             //********************
             //     Opgave 2
             //********************
@@ -92,7 +89,7 @@ namespace ImplementationProject
 
 
             // // Function for calculating S
-            double calculateS(IEnumerable<Tuple <ulong,int>> stream, HashTable hs) {
+            double calculateS(IEnumerable<Tuple <ulong,int>> stream, HashTable hs, Stopwatch stopwatch) {
                 double S = 0;
 
                 // Inserts all elements of stream into hashtable
@@ -101,6 +98,7 @@ namespace ImplementationProject
                 }
 
                 // Calculates S
+                stopwatch.Start();
                 LinkedHashEntry[] hashArray = hs.getTable();
                 int hashLength = hs.getArrayLength();
 
@@ -113,32 +111,15 @@ namespace ImplementationProject
                         currentEntry = currentEntry.getNext();
                     }
                 }
+                stopwatch.Stop();
                 return S;
             }
 
-            // double correctS = calculateS(stream, multiplyShiftTable);
+            // Stopwatch stopwatchMS = new Stopwatch();
+            // Stopwatch stopwatchMMP = new Stopwatch();
+            // Console.WriteLine("S using multiply shift hashtable: {0}. Time: {1}", calculateS(stream, multiplyShiftTable), stopwatchMS);
+            // Console.WriteLine("S using multiply mod prime hashtable: {0}", calculateS(stream, multiplyModPrimeTable), stopwatchMMP);
 
-            // Console.WriteLine("S using multiply shift hashtable: {0}", calculateS(stream, multiplyShiftTable));
-            // Console.WriteLine("S using multiply mod prime hashtable: {0}", calculateS(stream, multiplyModPrimeTable));
-
-            // //********************
-            // //     Opgave 4
-            // //********************
-            // //Console.WriteLine("\nOpgave 4");
-            // // Creating 4-universal hashtable
-            // // ulong testKey = 78;
-            // byte[] fourU_bytes_a0 = {0b0, 0b00000100, 0b01100100, 0b01001000, 0b10110111, 0b00100101, 0b00100101, 0b10011000, 0b10110000, 0b00001010, 0b01001110, 0b11010000};
-            // byte[] fourU_bytes_a1 = {0b0, 0b10000111, 0b11000101, 0b00111011, 0b00000101, 0b10100101, 0b00000110, 0b10100100, 0b10000111, 0b00011000, 0b01011001, 0b11110101};
-            // byte[] fourU_bytes_a2 = {0b0, 0b01101111, 0b10000110, 0b11010101, 0b10101100, 0b11000111, 0b10010110, 0b01011001, 0b00111010, 0b00110101, 0b10001100, 0b11100111};
-            // byte[] fourU_bytes_a3 = {0b0, 0b00111000, 0b11101101, 0b01011011, 0b10111101, 0b10101011, 0b11100000, 0b10000010, 0b10011011, 0b00100000, 0b11110101, 0b11100111};
-            // BigInteger fourU_a0 = new BigInteger(fourU_bytes_a0);
-            // BigInteger fourU_a1 = new BigInteger(fourU_bytes_a1);
-            // BigInteger fourU_a2 = new BigInteger(fourU_bytes_a2);
-            // BigInteger fourU_a3 = new BigInteger(fourU_bytes_a3);
-
-            // FourUniversal fourUHashFunc = new FourUniversal(fourU_a0, fourU_a1, fourU_a2, fourU_a3);
-            // // BigInteger fourTestValue = fourUHashFunc.hash(testKey);
-            // //Console.WriteLine("The hash value is {0}", fourTestValue);
 
             // //********************
             // //     Opgave 5
@@ -153,41 +134,12 @@ namespace ImplementationProject
 
 
             // //********************
-            // //     Opgave 6
-            // //********************
-            // Console.WriteLine("\nOpgave 6");
-
-            // // Creating h and s
-            // int t = 29;
-            // int b = 89;
-            // Tuple<hCountSketchHashFunc, sCountSketchHashFunc> hs= getCountSketchFunction(fourUHashFunc, t, b);
-            // hCountSketchHashFunc h = hs.Item1;
-            // sCountSketchHashFunc s = hs.Item2;
-
-            // // Creating stream
-            // // int stream_l = 9;
-            // // int stream_n = 56;
-            // // IEnumerable<Tuple <ulong,int> > stream = Stream.CreateStream(stream_n,stream_l);
-
-
-            // // Creating Count Sketch
-            // BasicCountSketch bsc = new BasicCountSketch(h, s, t);
-            // foreach (var (key,value) in stream){
-            //     bsc.Process(key, value);
-            // }
-            // double X = bsc.getSecondMoment();
-            // Console.WriteLine("X: {0}", X);
-
-
-
-
-            // //********************
             // //     Opgave 7
             // //********************
             Console.WriteLine("\nOpgave 7");
-            // Console.WriteLine("Correct answer: {0}", correctS);
 
-            double calculateCountSketchEstimator(IEnumerable<Tuple <ulong,int>> stream, BigInteger a0, BigInteger a1, BigInteger a2, BigInteger a3, int t){
+            // Functions that calculates Count-Sketch Estimator for Second Moment
+            double calculateCountSketchEstimator(IEnumerable<Tuple <ulong,int>> stream, BigInteger a0, BigInteger a1, BigInteger a2, BigInteger a3, int t, Stopwatch stopwatch){
                 // Setting up functions
                 int b = 89;
                 FourUniversal g = new FourUniversal(a0, a1, a2, a3);
@@ -195,11 +147,16 @@ namespace ImplementationProject
                 hCountSketchHashFunc h = hs.Item1;
                 sCountSketchHashFunc s = hs.Item2;
 
+                // Processing all keys
                 BasicCountSketch bsc = new BasicCountSketch(h, s, t);
                 foreach (var (key,value) in stream){
                     bsc.Process(key, value);
                 }
+
+                // Getting the second moment
+                stopwatch.Start();
                 double X = bsc.getSecondMoment();
+                stopwatch.Stop();
                 return X;
             }
 
@@ -208,13 +165,12 @@ namespace ImplementationProject
 
             // Function that performs experiment
             void performExperiment (IEnumerable<Tuple <ulong,int>> stream, int t){
+                Stopwatch stopWatch = new Stopwatch();
                 int [] randomVariables = new int[4];
                 
-                // Prints results in to text file
-                string fileName = "./experiment" + t + ".csv";
+                // Prints results in to csv file
+                string fileName = "./Experiments/experiment" + t + ".csv";
                 using (StreamWriter file = new StreamWriter(fileName)){
-                    // Formats so points can easily be copy pasted as csv file
-                    // file.WriteLine("Experiment;Estimation");
 
                     // Reads through file randomBits to get the random variables
                     using (StreamReader sr = new StreamReader("./randomBits.txt"))
@@ -244,7 +200,7 @@ namespace ImplementationProject
 
                             // Performs new experiment when 4 random variables have been acquired 
                             if (idx == 3){
-                                X[counter] = calculateCountSketchEstimator(stream,randomVariables[0], randomVariables[1], randomVariables[2], randomVariables[3], t);
+                                X[counter] = calculateCountSketchEstimator(stream,randomVariables[0], randomVariables[1], randomVariables[2], randomVariables[3], t, stopWatch);
                                 idx = 0;
                                 file.WriteLine("{0};{1}", counter, X[counter]);
                                 counter++;
@@ -255,36 +211,50 @@ namespace ImplementationProject
                         }
                     }
                 }
+                Console.WriteLine("Time in millisec: {0} \n", stopWatch.Elapsed.TotalMilliseconds);
             }
 
-            // Print so points can easily be copy pasted as csv file
-            int t = 20;
+            // Ms-experiment
+            Console.WriteLine("Hashing w. chaining (MS)");
+            Stopwatch stopWatchMs1 = new Stopwatch();
+            double S1 = calculateS(stream, multiplyShiftTable, stopWatchMs1);
+            Console.WriteLine("S: {0}\n", S1);
+
+
+            // // Experiment with Count-Sketch
+            int t = 15;
             Console.WriteLine("t = {0}", t);
             performExperiment(stream, t);
-            Console.WriteLine("Experiment done");
-
 
 
             // //********************
             // //     Opgave 8
             // //********************
             Console.WriteLine("\nOpgave 8");
-            t = 5;
-            Console.WriteLine("t = {0}", t);
-            performExperiment(stream, t);
-            Console.WriteLine("Experiment done");
+            // New stream
+            stream_n = 100000;
+            stream_l = 29;
+            stream = Stream.CreateStream(stream_n,stream_l);
 
+            // Ms-experiment
+            Console.WriteLine("Hashing w. chaining (MS)");
+            Stopwatch stopWatchMs2 = new Stopwatch();
+            double S2 = calculateS(stream, multiplyShiftTable, stopWatchMs2);
+            Console.WriteLine("S: {0}", S2);
+            Console.WriteLine("Time in millisec: {0} \n", stopWatchMs2.Elapsed.TotalMilliseconds);
 
+            // Experiments with Count Sketch          
             t = 10;
-            Console.WriteLine("t = {0}", t);
+            Console.WriteLine("Experiment t = {0}", t);
             performExperiment(stream, t);
-            Console.WriteLine("Experiment done");
-
-            t = 30;
-            Console.WriteLine("t = {0}", t);
+            
+            t = 18;
+            Console.WriteLine("Experiment t = {0}", t);
             performExperiment(stream, t);
-            Console.WriteLine("Experiment done");
 
+            t = 20;
+            Console.WriteLine("Experiment t = {0}", t);
+            performExperiment(stream, t);
         }
             
     }
