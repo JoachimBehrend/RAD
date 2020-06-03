@@ -2,15 +2,19 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # load data
-t = 18
-file = "./Experiments/experiment" + (str)(t) + ".csv"
+t = 20
+fileName = "20_max"
+realS = 13386618
+experiments = 3
+file = "./Experiments/experiment" + fileName + ".csv"
 data = np.loadtxt(file, delimiter=";")
 X = data[:,-1].reshape((len(data[:,-1]),1))
 sortedX = sorted(X)
-S = np.full((100,1), 100000)
-xNumbers = np.arange(0,100)
+S = np.full((100,1), realS)
+xNumbers = np.arange(0,experiments)
 
 # Makes first plot
+plt.ticklabel_format(style='plain')
 plt.scatter(xNumbers,sortedX, 10)
 plt.axhline(y=S[0], color='r', linestyle='-')
 plt.ylabel("Estimates")
@@ -21,8 +25,8 @@ plt.show()
 # Calculates mean square error
 def mse(X, S):
     s = 0.0
-    for i in range (100):
-        s += (X[i]-S[i])**2/100
+    for i in range (experiments):
+        s += (X[i]-S[i])**2/experiments
     return s
 
 # Prints mean and mean square variance
@@ -34,29 +38,29 @@ print("Var:  %16f" % actualVariance)
 print("Diff: %16f" % (abs(actualVariance-mse(X,S))/actualVariance*100))
 
 # Groups data
-G = []
-G.append(X[:11])
-G.append(X[11:22])
-G.append(X[22:33])
-G.append(X[33:44])
-G.append(X[44:55])
-G.append(X[55:66])
-G.append(X[66:77])
-G.append(X[77:88])
-G.append(X[88:99])
-
-# Gets median of all groups
-M = []
-for x in G:
-    M.append((np.mean(x)))
-sortedM = sorted(M)
-mNumbers = np.arange(0,9)
-
-# Plots
-plt.ticklabel_format(useOffset=False)
-plt.scatter(mNumbers,sortedM)
-plt.axhline(y=S[0], color='r', linestyle='-')
-plt.ylabel("Estimates")
-plt.xlabel("M")
-plt.title('Median estimates, t = %i' %t)
-plt.show()
+# G = []
+# G.append(X[:11])
+# G.append(X[11:22])
+# G.append(X[22:33])
+# G.append(X[33:44])
+# G.append(X[44:55])
+# G.append(X[55:66])
+# G.append(X[66:77])
+# G.append(X[77:88])
+# G.append(X[88:99])
+#
+# # Gets median of all groups
+# M = []
+# for x in G:
+#     M.append((np.mean(x)))
+# sortedM = sorted(M)
+# mNumbers = np.arange(0,9)
+#
+# # Plots
+# plt.ticklabel_format(useOffset=False)
+# plt.scatter(mNumbers,sortedM)
+# plt.axhline(y=S[0], color='r', linestyle='-')
+# plt.ylabel("Estimates")
+# plt.xlabel("M")
+# plt.title('Median estimates, t = %i' %t)
+# plt.show()
