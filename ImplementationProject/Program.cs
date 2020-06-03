@@ -119,6 +119,31 @@ namespace ImplementationProject
             // Console.WriteLine("S using multiply mod prime hashtable: {0}", calculateS(stream, multiplyModPrimeTable), stopwatchMMP);
 
 
+            //********************
+            //     Opgave 4
+            //********************
+            
+            Console.WriteLine("\nOpgave 4 time");
+            Stopwatch stopwatch4 = new Stopwatch();
+            stopwatch4.Start();
+            byte[] a0_b = {0b0,0b10010101,0b00001011,0b10001011,0b11001011,0b11101010,0b11001010,0b10100111,0b11011101,0b00110100,0b00111100,0b11101000};
+            byte[] a1_b = {0b1,0b10100101,0b01011000,0b01010000,0b00111101,0b10110101,0b00011000,0b01101110,0b11100011,0b00011111,0b10101000,0b00100010};
+            byte[] a2_b = {0b1,0b11011001,0b01011111,0b01010111,0b00011001,0b10001101,0b00111101,0b00011111,0b01100011,0b11001000,0b01110001,0b11100001};
+            byte[] a3_b = {0b1,0b00110110,0b01101011,0b01111011,0b01010111,0b10101100,0b11101101,0b10010000,0b10001111,0b00001101,0b11111101,0b01001000};
+            BigInteger a0 = new BigInteger(a0_b);
+            BigInteger a1 = new BigInteger(a1_b); 
+            BigInteger a2 = new BigInteger(a2_b); 
+            BigInteger a3 = new BigInteger(a3_b); 
+            FourUniversal fourUniversalHashFunc = new FourUniversal(a0,a1,a2,a3); 
+            BigInteger fUSum = 0;
+            foreach (var (key,value) in stream){
+                fUSum += fourUniversalHashFunc.hash(key);
+            }
+            Console.WriteLine("Sum using 4-Universal: {0}", fUSum);
+            stopwatch4.Stop();
+            Console.WriteLine("Time in millisec, 4-Universal: {0} \n", stopwatch4.Elapsed.TotalMilliseconds);     
+
+
             // //********************
             // //     Opgave 5
             // //********************

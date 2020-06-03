@@ -969,19 +969,19 @@
     ]
   },
   "packageFolders": {
-    "/home/maria/.nuget/packages/": {}
+    "C:\\Users\\JoachimdeLipthayBehr\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/maria/Dropbox/Uni/RAD/RAD/ImplementationProject/ImplementationProject.csproj",
+      "projectUniqueName": "C:\\Users\\JoachimdeLipthayBehr\\Documents\\KU\\RAD\\Git\\RAD\\ImplementationProject\\ImplementationProject.csproj",
       "projectName": "ImplementationProject",
-      "projectPath": "/home/maria/Dropbox/Uni/RAD/RAD/ImplementationProject/ImplementationProject.csproj",
-      "packagesPath": "/home/maria/.nuget/packages/",
-      "outputPath": "/home/maria/Dropbox/Uni/RAD/RAD/ImplementationProject/obj/",
+      "projectPath": "C:\\Users\\JoachimdeLipthayBehr\\Documents\\KU\\RAD\\Git\\RAD\\ImplementationProject\\ImplementationProject.csproj",
+      "packagesPath": "C:\\Users\\JoachimdeLipthayBehr\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\JoachimdeLipthayBehr\\Documents\\KU\\RAD\\Git\\RAD\\ImplementationProject\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/maria/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\JoachimdeLipthayBehr\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
@@ -1030,28 +1030,16 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "downloadDependencies": [
-          {
-            "name": "Microsoft.AspNetCore.App.Ref",
-            "version": "[3.1.2, 3.1.2]"
-          }
-        ],
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/3.1.300/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.202\\RuntimeIdentifierGraph.json"
       }
     }
   },
   "logs": [
-    {
-      "code": "Undefined",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Problem reading the cache file /home/maria/Dropbox/Uni/RAD/RAD/ImplementationProject/obj/project.nuget.cache : Unexpected character encountered while parsing value: <. Path '', line 0, position 0."
-    },
     {
       "code": "NU1701",
       "level": "Warning",
