@@ -86,7 +86,7 @@ namespace ImplementationProject
 
 
             // // Function for calculating S
-            double calculateS(IEnumerable<Tuple <ulong,int>> stream, HashTable hs, Stopwatch stopwatch) {
+            double calculateS(IEnumerable<Tuple <ulong,int>> stream, HashTable hs) {
                 double S = 0;
 
                 // Inserts all elements of stream into hashtable
@@ -95,7 +95,6 @@ namespace ImplementationProject
                 }
 
                 // Calculates S
-                stopwatch.Start();
                 LinkedHashEntry[] hashArray = hs.getTable();
                 int hashLength = hs.getArrayLength();
 
@@ -108,7 +107,6 @@ namespace ImplementationProject
                         currentEntry = currentEntry.getNext();
                     }
                 }
-                stopwatch.Stop();
                 return S;
             }
 
@@ -165,7 +163,7 @@ namespace ImplementationProject
             IEnumerable<Tuple <ulong,int> > stream2 = Stream.CreateStream(stream_n2,stream_l2);
 
             // Functions that calculates Count-Sketch Estimator for Second Moment
-            double calculateCountSketchEstimator(IEnumerable<Tuple <ulong,int>> stream, BigInteger a0, BigInteger a1, BigInteger a2, BigInteger a3, int t, Stopwatch stopwatch){
+            double calculateCountSketchEstimator(IEnumerable<Tuple <ulong,int>> stream, BigInteger a0, BigInteger a1, BigInteger a2, BigInteger a3, int t){
                 // Setting up functions
                 int b = 89;
                 FourUniversal g = new FourUniversal(a0, a1, a2, a3);
@@ -180,9 +178,7 @@ namespace ImplementationProject
                 }
 
                 // Getting the second moment
-                stopwatch.Start();
                 double X = bsc.getSecondMoment();
-                stopwatch.Stop();
                 return X;
             }
 
@@ -226,7 +222,7 @@ namespace ImplementationProject
 
                             // Performs new experiment when 4 random variables have been acquired 
                             if (idx == 3){
-                                X[counter] = calculateCountSketchEstimator(stream2,randomVariables[0], randomVariables[1], randomVariables[2], randomVariables[3], t, stopWatch);
+                                X[counter] = calculateCountSketchEstimator(stream,randomVariables[0], randomVariables[1], randomVariables[2], randomVariables[3], t);
                                 idx = 0;
                                 file.WriteLine("{0};{1}", counter, X[counter]);
                                 counter++;
@@ -237,13 +233,11 @@ namespace ImplementationProject
                         }
                     }
                 }
-                Console.WriteLine("Time in millisec: {0} \n", stopWatch.Elapsed.TotalMilliseconds);
             }
 
             // Ms-experiment
             Console.WriteLine("Hashing w. chaining (MS)");
-            Stopwatch stopWatchMs1 = new Stopwatch();
-            double S1 = calculateS(stream2, multiplyShiftTable, stopWatchMs1);
+            double S1 = calculateS(stream, multiplyShiftTable);
             Console.WriteLine("S: {0}\n", S1);
 
 
@@ -266,10 +260,12 @@ namespace ImplementationProject
 
             // Ms-experiment
             Console.WriteLine("Hashing w. chaining (MS)");
-            Stopwatch stopWatchMs2 = new Stopwatch();
-            double S2 = calculateS(stream2, multiplyShiftTable, stopWatchMs2);
+            Stopwatch stopWatchMs = new Stopwatch();
+            stopWatchMs.Start();
+            double S2 = calculateS(stream, multiplyShiftTable);
+            stopWatchMs.Stop();
             Console.WriteLine("S: {0}", S2);
-            Console.WriteLine("Time in millisec: {0} \n", stopWatchMs2.Elapsed.TotalMilliseconds);
+            Console.WriteLine("Time in millisec: {0} \n", stopWatchMs.Elapsed.TotalMilliseconds);
 
             // Experiments with Count Sketch          
             t = 4;
