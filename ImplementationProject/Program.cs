@@ -233,7 +233,7 @@ namespace ImplementationProject
                         }
                     }
                 }
-                Console.WriteLine("Eksperiment t = {0}, averageTime = {1} ms", t, stopwatch.ElapsedMilliseconds/experimentCount);
+                Console.WriteLine("Eksperiment t = {0}, averageTime = {1} ms", t, stopwatch.Elapsed.TotalMilliseconds/(double)experimentCount);
             }
 
             // Ms-experiment
@@ -247,8 +247,8 @@ namespace ImplementationProject
             Console.WriteLine("t = {0}", t);
             performExperiment(stream2, t,100,"13");
 
-            int stream_n_max = 100000;
-            int stream_l_max = 13;
+            int stream_n_max = 10000000;
+            int stream_l_max = 23;
             IEnumerable<Tuple <ulong,int> > stream_max = Stream.CreateStream(stream_n_max,stream_l_max);
             performExperiment(stream_max, t, 3,"13_max");
 
