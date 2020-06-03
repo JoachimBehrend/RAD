@@ -233,6 +233,7 @@ namespace ImplementationProject
                         }
                     }
                 }
+                Console.WriteLine("Eksperiment t = {0}, averageTime = {1} ms", t, stopwatch.ElapsedMilliseconds/experimentCount);
             }
 
             // Ms-experiment
